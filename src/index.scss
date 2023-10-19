@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --primary-color: #002b49;
+        --secondary-color: #002b49;
+
+        --height-header: 100px;
+
+        // z-index
+        --z-cursor: 160;
+        --z-loading: 159;
+        --z-hamburger: 151;
+        --z-nav: 150;
+        --z-social: 140;
+        --z-modal: 110;
+        --z-button: 109;
+        --z-header: 64;
+        --z-body: 5;
+        --z-hero: 4;
+    }
+
+    html {
+        @apply scroll-smooth 2xl:text-[calc(.65vw_+_.1em)];
+    }
+
+    body {
+        @apply font-primary b1;
+    }
+
+    .b1 {
+        @apply text-[0.9375rem] leading-6 xl:text-[calc(0.9375rem_+_0.04vw)] xl:leading-[calc(1.5rem_+_0.04vw)];
+    }
+}
+
+@layer components {
+    .hamburder-button {
+        @apply bg-primary relative h-14 w-14 cursor-pointer rounded-full;
+        span {
+            @apply absolute left-1/2 top-1/2 block h-[2px] w-7 -translate-x-1/2 bg-white;
+            &:nth-of-type(1) {
+                @apply -translate-y-1/2;
+            }
+
+            &:nth-of-type(2) {
+                @apply -translate-y-[calc(50%_-_7px)];
+            }
+
+            &:nth-of-type(3) {
+                @apply -translate-y-[calc(50%_+_7px)];
+            }
+        }
+    }
+
+    .home-hero {
+        &::before {
+            background-size: 2rem auto;
+            background-image: url('/images/motif-gd-1.svg');
+            @apply pointer-events-none absolute left-0 top-0 z-0 h-[90%] w-full opacity-50 mix-blend-multiply content-[''];
+        }
+    }
+}
+
+@layer utilities {
+    .h-screen-view {
+        height: calc(var(--vh, 1vh) * 100);
+    }
+}
