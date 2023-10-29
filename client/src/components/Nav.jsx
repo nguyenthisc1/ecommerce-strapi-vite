@@ -17,7 +17,7 @@ export default function Nav() {
                         </li>
 
                         <li>
-                            <Link to="/">
+                            <Link to="/products">
                                 <div className="text-2xl pb-6">Product</div>
                             </Link>
                         </li>

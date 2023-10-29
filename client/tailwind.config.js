@@ -10,6 +10,8 @@ export default {
             colors: {
                 primary: 'var(--primary-color)',
                 secondary: 'var(--secondary-color)',
+                yellow: 'var(--yellow-color)',
+                orange: 'var(--orange-color)'
                 // dark: 'var(--color-dark)',
                 // cream: 'var(--color-cream)',
                 // 'cream-2': 'var(--color-cream-2)',
@@ -22,4 +24,7 @@ export default {
             },
         },
     },
+    plugins: [
+        require('tailwindcss-text-fill-stroke'), // no options to configure
+    ],
 };

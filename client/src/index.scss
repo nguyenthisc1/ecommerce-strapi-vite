@@ -6,9 +6,11 @@
     :root {
         --primary-color: #002b49;
         --secondary-color: #002b49;
-
+        --yellow-color: #efca74;
+        --orange-color: #fab14b;
         --height-header: 100px;
 
+        --t: 0.5s;
         // z-index
         --z-cursor: 160;
         --z-loading: 159;
@@ -23,7 +25,7 @@
     }
 
     html {
-        @apply scroll-smooth 2xl:text-[calc(.65vw_+_.1em)];
+        @apply 2xl:text-[calc(.65vw_+_.1em)];
     }
 
     body {
@@ -31,15 +33,19 @@
     }
 
     .b1 {
-        @apply text-[0.9375rem] leading-6 xl:text-[calc(0.9375rem_+_0.04vw)] xl:leading-[calc(1.5rem_+_0.04vw)];
+        @apply text-[0.9375rem] font-light leading-6 tracking-widest xl:text-[calc(0.9375rem_+_0.04vw)] xl:leading-[calc(1.5rem_+_0.04vw)];
     }
 }
 
 @layer components {
+    .container {
+        @apply px-4 lg:px-6;
+    }
+
     .hamburder-button {
-        @apply bg-primary relative h-14 w-14 cursor-pointer rounded-full;
+        @apply relative h-14 w-14 cursor-pointer rounded-full bg-white;
         span {
-            @apply absolute left-1/2 top-1/2 block h-[2px] w-7 -translate-x-1/2 bg-white;
+            @apply absolute left-1/2 top-1/2 block h-[2px] w-7 -translate-x-1/2 bg-black;
             &:nth-of-type(1) {
                 @apply -translate-y-1/2;
             }
@@ -58,7 +64,18 @@
         &::before {
             background-size: 2rem auto;
             background-image: url('/images/motif-gd-1.svg');
-            @apply pointer-events-none absolute left-0 top-0 z-0 h-[90%] w-full opacity-50 mix-blend-multiply content-[''];
+            @apply pointer-events-none absolute left-0 top-0 z-0 h-[calc(100%_-_7.5vmax)] w-full opacity-50 mix-blend-multiply content-[''] 2xl:h-[calc(100%_-_5.5vmax)];
+        }
+    }
+
+    .hero-text {
+        -webkit-text-stroke: 2px #efe9e6;
+    }
+
+    .tt-image {
+        @apply relative w-full overflow-hidden before:block before:pb-[100%];
+        img {
+            @apply absolute left-0 top-0 block h-full w-full;
         }
     }
 }

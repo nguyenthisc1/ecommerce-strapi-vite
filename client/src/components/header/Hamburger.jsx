@@ -1,14 +1,14 @@
 import { useTranslation } from 'react-i18next';
 
-export default function Hamburger() {
+export default function Hamburger({className}) {
     const { i18n } = useTranslation();
 
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng);
     };
     return (
-        <div className="hamburger pointer-events-none fixed right-0 top-0 z-[var(--z-hamburger)] h-[var(--height-header)] w-full">
-            <div className="container h-full">
+        <div className={`${className} hamburger pointer-events-none fixed right-0 top-0 z-[var(--z-hamburger)] h-[var(--height-header)] w-full text-white mix-blend-difference`}>
+            <div className="wrapper h-full px-10">
                 <div className="flex h-full items-center justify-end space-x-4">
                     <div className="text-[.75em] uppercase">Menu</div>
                     <div className="hamburder-button pointer-events-auto">
