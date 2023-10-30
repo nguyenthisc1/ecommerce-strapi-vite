@@ -8,24 +8,28 @@ import DetailProduct from './pages/Detail-product';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import Header from './components/header/Header';
+import { ApolloProvider } from '@apollo/client/react';
+import { client } from './libs/apollo';
 
 function App() {
     const lenisRef = useRef();
 
     return (
-        <ReactLenis root ref={lenisRef}>
-            <Header />
-            <Hamburger />
-            <Nav />
-            <main className="bg-white">
-                <Routes>
-                    <Route exact path="/" element={<Home />} />
-                    <Route path="/products" element={<Products />} />
-                    <Route path="/detail/:id" element={<DetailProduct />} />
-                </Routes>
-            </main>
-            <Footer />
-        </ReactLenis>
+        <ApolloProvider client={client}>
+            <ReactLenis root ref={lenisRef}>
+                <Header />
+                <Hamburger />
+                <Nav />
+                <main className="bg-white">
+                    <Routes>
+                        <Route exact path="/" element={<Home />} />
+                        <Route path="/products" element={<Products />} />
+                        <Route path="/detail/:id" element={<DetailProduct />} />
+                    </Routes>
+                </main>
+                <Footer />
+            </ReactLenis>
+        </ApolloProvider>
     );
 }
 

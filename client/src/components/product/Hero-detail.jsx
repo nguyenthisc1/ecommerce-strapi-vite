@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-export default function HeroDetail() {
+export default function HeroDetail({ images, title, description, quantity }) {
     return (
         <section className="pt-[var(--height-header)] lg:h-screen">
             <div className="wrapper flex h-full space-x-3 p-10">
-                <div className="bg-primary relative flex w-2/5 items-center justify-center rounded-[48px]">
+                <div className="relative flex w-2/5 items-center justify-center rounded-[48px] bg-primary">
                     <Link to="/products">
                         <div className="group absolute left-10 top-10 z-10 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white transition-colors duration-[var(--t)] hover:bg-black">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
