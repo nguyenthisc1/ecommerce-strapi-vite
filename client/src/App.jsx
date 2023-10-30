@@ -19,9 +19,9 @@ function App() {
             <Nav />
             <main className="bg-white">
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route exact path="/" element={<Home />} />
                     <Route path="/products" element={<Products />} />
-                    <Route path="/detail" element={<DetailProduct />} />
+                    <Route path="/detail/:id" element={<DetailProduct />} />
                 </Routes>
             </main>
             <Footer />
