@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-export default function HeroDetail({ images, title, description, quantity }) {
+import Button from '../Button';
+
+export default function HeroDetail(props) {
     return (
         <section className="pt-[var(--height-header)] lg:h-screen">
             <div className="wrapper flex h-full space-x-3 p-10">
@@ -13,10 +15,32 @@ export default function HeroDetail({ images, title, description, quantity }) {
                         </div>
                     </Link>
                     <div className="tt-image h-4/5">
-                        <img className="w-full object-contain" src={'/images/img_product.png'} />
+                        <img className="w-full object-contain" src={`${HOST}${props.data?.attributes.images.data[0].attributes.url}`} />
                     </div>
                 </div>
-                <div className="w-3/5 rounded-[48px] bg-gray-100"></div>
+                <div className="flex w-3/5 flex-col justify-between rounded-[48px] bg-gray-100 p-10">
+                    <div className="text-lg">
+                        <div className="space-y-5">
+                            <h1 className="text-4xl">{props.data?.attributes.title}</h1>
+                            <p>Quantity: {props.data?.attributes.quantity}</p>
+
+                            <div className="flex space-x-2">
+                                <p>Categories:</p>
+                                <div className="flex space-x-2">
+                                    {props.data?.attributes.categories.data.map((category) => (
+                                        <div key={category.id}>{category.attributes.name}</div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="my-10 h-[1px] w-full bg-black"></div>
+
+                        <p>{props.data?.attributes.description || 'description'}</p>
+                    </div>
+
+                    <Button text={'Buy'} className="overflow-hidden rounded-[48px] py-20 !text-4xl" />
+                </div>
             </div>
         </section>
     );

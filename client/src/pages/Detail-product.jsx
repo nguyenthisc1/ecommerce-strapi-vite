@@ -1,14 +1,25 @@
-import React from 'react';
-import HeroDetail from '../components/product/Hero-detail';
+import { useQuery } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom/dist';
-import { useFetch } from '../hooks/useFetch';
+import { GET_PRODUCT } from '../gql/product.gql';
 
 export default function DetailProduct() {
-    const params = useParams()
-    const { data, loading } = useFetch(`${HOST_API}/products/${params.id}`);
+    const { id } = useParams();
+    const { data, loading } = useQuery(GET_PRODUCT, {
+        variables: { productId: id },
+    });
+
+    const [product, setProduct] = useState(null);
+
+    useEffect(() => {
+        if (!loading && data) {
+            setProduct(data?.product.data);
+        }
+    }, [data, loading]);
+
     return (
         <>
-            <HeroDetail />
+            {/* <HeroDetail data={product} /> */}
         </>
     );
 }

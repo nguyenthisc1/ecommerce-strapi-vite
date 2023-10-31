@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-export default function ProductHomeItem({ title, description, image, className, href }) {
+export default function ProductItem({ title, description, image, className, href }) {
     return (
         <div className={`group relative overflow-hidden rounded-[48px] bg-white ${className}`}>
             <Link to={href ? href : '/'}>
@@ -15,8 +15,8 @@ export default function ProductHomeItem({ title, description, image, className, 
                 </div>
                 <div className="relative z-10 space-y-20 px-6 py-10">
                     <div className="space-y-8 text-center text-black">
-                        <p className="text-3xl font-light tracking-widest">{title}</p>
-                        <p className="font-light">{description}</p>
+                        <p className="text-3xl font-light tracking-widest line-clamp-1">{title}</p>
+                        <p className="font-light line-clamp-2">{description}</p>
                     </div>
                     <div>
                         <div className="tt-image">

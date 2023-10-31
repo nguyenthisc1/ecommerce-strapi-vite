@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import './fonts.css';
 import './index.scss';
-import { BrowserRouter } from 'react-router-dom';
-import './libs/i88n.js';
+import { LocaleProvider } from './provider/localeProvider.jsx';
 
 // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
 let vh = window.innerHeight * 0.01;
@@ -19,8 +19,10 @@ window.addEventListener('resize', () => {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <LocaleProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </LocaleProvider>
     </React.StrictMode>
 );
