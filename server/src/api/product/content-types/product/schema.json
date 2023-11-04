@@ -39,6 +39,19 @@
       "relation": "manyToMany",
       "target": "api::category.category",
       "inversedBy": "products"
+    },
+    "price": {
+      "type": "biginteger",
+      "default": "10000"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "new",
+        "stocking",
+        "out of stock"
+      ],
+      "default": "new"
     }
   }
 }

@@ -1,9 +1,8 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import Button from './Button';
 
-export default function ProductIntro() {
-    const { t } = useTranslation();
+export default function ProductIntro({ data }) {
+
     return (
         <section className="relative">
             <div className="grid grid-cols-2">
@@ -16,10 +15,10 @@ export default function ProductIntro() {
                 <div className="pl-[1vw] pr-[5vw]">
                     <div className="relative flex min-h-screen max-w-lg items-center">
                         <div>
-                            <h2 className=" font-secondary mb-8 text-5xl md:text-6xl lg:text-7xl xl:text-8xl">{t('product_title')}</h2>
-                            <p className="mb-4 text-lg font-thin md:text-xl">{t('product_description')}</p>
-                            <p className="mb-8 font-normal">{t('product_taste')}</p>
-                            <Button text={t('button_text')} />
+                            <h2 className=" mb-8 font-secondary text-5xl md:text-6xl lg:text-7xl xl:text-8xl"> {data?.product_intro_title}</h2>
+                            <p className="mb-4 text-lg font-thin md:text-xl">{data?.product_intro_description} </p>
+                            <p className="mb-8 font-normal"> {data?.product_intro_description_2} </p>
+                            <Button text={data?.cta.title} href={data?.cta.link ? data?.cta.link : null}/>
                         </div>
                     </div>
                 </div>

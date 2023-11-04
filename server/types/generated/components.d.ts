@@ -1,19 +1,47 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
-export interface ButtonButton extends Schema.Component {
-  collectionName: 'components_button_buttons';
+export interface ComponentsCta extends Schema.Component {
+  collectionName: 'components_components_ctas';
   info: {
-    displayName: 'Button';
+    displayName: 'cta';
+    description: '';
   };
   attributes: {
-    Button: Attribute.String & Attribute.Required & Attribute.DefaultTo<'Text'>;
+    title: Attribute.String & Attribute.Required & Attribute.DefaultTo<'text'>;
+    link: Attribute.String;
+  };
+}
+
+export interface ComponentsHeader extends Schema.Component {
+  collectionName: 'components_components_headers';
+  info: {
+    displayName: 'header';
+    description: '';
+  };
+  attributes: {
+    logo: Attribute.Media;
+    navItems: Attribute.Component<'components.nav-item', true>;
+  };
+}
+
+export interface ComponentsNavItem extends Schema.Component {
+  collectionName: 'components_components_nav_items';
+  info: {
+    displayName: 'navItem';
+    icon: 'link';
+  };
+  attributes: {
+    name: Attribute.String & Attribute.DefaultTo<'name '>;
+    link: Attribute.String & Attribute.DefaultTo<'/'>;
   };
 }
 
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
-      'button.button': ButtonButton;
+      'components.cta': ComponentsCta;
+      'components.header': ComponentsHeader;
+      'components.nav-item': ComponentsNavItem;
     }
   }
 }

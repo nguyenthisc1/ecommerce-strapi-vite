@@ -772,6 +772,12 @@ export interface ApiHomeHome extends Schema.SingleType {
           localized: true;
         };
       }>;
+    cta: Attribute.Component<'components.cta'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -783,6 +789,52 @@ export interface ApiHomeHome extends Schema.SingleType {
       'api::home.home',
       'oneToMany',
       'api::home.home'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiLayoutLayout extends Schema.SingleType {
+  collectionName: 'layouts';
+  info: {
+    singularName: 'layout';
+    pluralName: 'layouts';
+    displayName: 'Layout';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    header: Attribute.Component<'components.header'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::layout.layout',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::layout.layout',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::layout.layout',
+      'oneToMany',
+      'api::layout.layout'
     >;
     locale: Attribute.String;
   };
@@ -816,6 +868,9 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'manyToMany',
       'api::category.category'
     >;
+    price: Attribute.BigInteger & Attribute.DefaultTo<'10000'>;
+    status: Attribute.Enumeration<['new', 'stocking', 'out of stock']> &
+      Attribute.DefaultTo<'new'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -831,6 +886,80 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+  };
+}
+
+export interface ApiProductsPageProductsPage extends Schema.SingleType {
+  collectionName: 'products_pages';
+  info: {
+    singularName: 'products-page';
+    pluralName: 'products-pages';
+    displayName: 'Products page';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    hero_title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Attribute.DefaultTo<'title'>;
+    hero_description: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Attribute.DefaultTo<'Description'>;
+    hero_image: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    cta: Attribute.Component<'components.cta'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    product_list_title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Attribute.DefaultTo<'Title'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::products-page.products-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::products-page.products-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::products-page.products-page',
+      'oneToMany',
+      'api::products-page.products-page'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -852,7 +981,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::category.category': ApiCategoryCategory;
       'api::home.home': ApiHomeHome;
+      'api::layout.layout': ApiLayoutLayout;
       'api::product.product': ApiProductProduct;
+      'api::products-page.products-page': ApiProductsPageProductsPage;
     }
   }
 }

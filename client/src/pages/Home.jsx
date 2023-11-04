@@ -1,19 +1,38 @@
-import { useQuery } from '@apollo/client';
-import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useEffect, useState } from 'react';
+import { homeApi } from '../apis/pages.api';
 import Hero from '../components/Hero';
-import { GET_HOME_CONTENT } from '../gql/pages.gql';
+import ProductIntro from '../components/Product-intro';
 import { useLocale } from '../hooks/useLocales';
+
 export default function Home() {
     const { state } = useLocale();
-    const { data, loading } = useQuery(GET_HOME_CONTENT, {
-        variables: { locale: state.locale },
+    const [homeContent, setHomeContent] = useState(null);
+
+    const { data, isLoading } = useQuery({
+        queryKey: ['home-content', state.locale],
+        queryFn: async () =>
+            await homeApi.getContent({
+                options: {
+                    params: {
+                        locale: state.locale,
+                    },
+                },
+                populate: 'populate=cta',
+            }),
     });
+
+    useEffect(() => {
+        if (!isLoading) {
+            setHomeContent(data?.data.attributes);
+        }
+    }, [isLoading, state.locale]);
 
     return (
         <>
-            <Hero data={data?.home.data.attributes} />
-            {/* <ProductIntro /> */}
-            {/* <ProductHomeList /> */}
+            <Hero data={homeContent} />
+            <ProductIntro data={homeContent} />
+            {/* <ProductHomeList title={homeContent?.product_list_title} /> */}
         </>
     );
 }

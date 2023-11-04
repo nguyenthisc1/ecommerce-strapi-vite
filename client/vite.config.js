@@ -14,5 +14,6 @@ export default defineConfig({
     define: {
         HOST_API: `"${process.env.HOST_API}"`,
         HOST: `"${process.env.HOST}"`,
+        API_TOKEN: `"${process.env.API_TOKEN}"`,
     },
 });
