@@ -1,4 +1,4 @@
-import { useLocale } from '../../hooks/useLocales';
+import { useLocale } from '../hooks/useLocales';
 
 export default function Hamburger({ className }) {
     const { state, dispatch } = useLocale();

@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import productsApi from '../apis/products.api';
-import ProductItem from './Product-item';
+import ProductItem from '../Product-item';
+import { useQuery } from '@tanstack/react-query';
+import productsApi from '../../apis/products.api';
 
 export default function ProductHomeList({ title }) {
     const [products, setProducts] = useState(null);
 
-    useEffect(() => {
-        productsApi
-            .getAll({
+    const { data, isLoading } = useQuery({
+        queryKey: ['products'],
+        queryFn: async () =>
+            await productsApi.getAll({
                 populate: 'populate=images',
-            })
-            .then((res) => setProducts(res?.data));
-    }, [productsApi]);
+            }),
+    });
+
+    useEffect(() => {
+        if (!isLoading) {
+            setProducts(data?.data);
+        }
+    }, [isLoading]);
 
     return (
         <section className="rounded-t-[48px] bg-primary py-32 text-white">
