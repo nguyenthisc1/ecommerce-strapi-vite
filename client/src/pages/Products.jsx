@@ -12,6 +12,7 @@ export default function Products() {
     const [products, setProducts] = useState(null);
     const [pageContent, setPageContent] = useState(null);
     const [category, setCategory] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState('');
 
     const { data: pageData, isLoading: pageLoading } = useQuery({
         queryKey: ['products-content', state.locale],
@@ -22,45 +23,48 @@ export default function Products() {
                         locale: state.locale,
                     },
                 },
-                populate: 'populate=cta&[populate]=hero_image',
+                populate: 'populate=cta&populate=hero_image',
             }),
     });
 
-    const { data: productsData, isLoading: productsLoading } = useQuery({
+    const { data: productsData, isSuccess: productsSuccess } = useQuery({
         queryKey: ['products'],
         queryFn: async () =>
             await productsApi.getAll({
-                populate: 'populate=images',
+                populate: 'populate=categories&populate=images',
             }),
     });
 
     const { data: categoryData, isLoading: categoryLoading } = useQuery({
         queryKey: ['category'],
-        queryFn: async () => await categoryApi.getAll({}),
+        queryFn: async () =>
+            await categoryApi.getAll({
+                populate: 'populate=products',
+            }),
     });
 
     useEffect(() => {
         if (!pageLoading) {
             setPageContent(pageData?.data.attributes);
         }
-    }, [pageLoading, state.locale]);
+    }, [pageLoading, state.locale, pageData]);
 
     useEffect(() => {
-        if (!productsLoading) {
-            setProducts(productsData?.data);
+        if (productsSuccess) {
+            setProducts(productsData.data);
         }
-    }, [productsLoading, productsData]);
+    }, [productsSuccess, productsData]);
 
     useEffect(() => {
         if (!categoryLoading) {
             setCategory(categoryData?.data);
         }
-    }, [categoryLoading, productsData]);
+    }, [categoryLoading, categoryData]);
 
     return (
         <>
             <Hero data={pageContent} />
-            <List title={pageContent?.product_list_title} data={products} category={category} />
+            <List title={pageContent?.product_list_title} data={products} category={category} selectCategory={setSelectedCategory} filter={selectedCategory} />
         </>
     );
 }

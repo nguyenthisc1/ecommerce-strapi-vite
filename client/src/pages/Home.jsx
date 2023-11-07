@@ -2,15 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { homePageApi } from '../apis/pages.api';
 import Hero from '../components/home/Hero';
-import ProductIntro from '../components/home/Product-intro';
 import ProductHomeList from '../components/home/Product-home-list';
+import ProductIntro from '../components/home/Product-intro';
 import { useLocale } from '../hooks/useLocales';
 
 export default function Home() {
     const { state } = useLocale();
     const [homeContent, setHomeContent] = useState(null);
-
-    const { data, isLoading } = useQuery({
+    const { data, isSuccess } = useQuery({
         queryKey: ['home-content', state.locale],
         queryFn: async () =>
             await homePageApi.getContent({
@@ -24,10 +23,10 @@ export default function Home() {
     });
 
     useEffect(() => {
-        if (!isLoading) {
+        if (isSuccess) {
             setHomeContent(data?.data.attributes);
         }
-    }, [isLoading, state.locale]);
+    }, [isSuccess, state.locale]);
 
     return (
         <>

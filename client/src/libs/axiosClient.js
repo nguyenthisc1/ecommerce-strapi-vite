@@ -1,8 +1,4 @@
-import Axios from 'axios';
-import { setupCache, buildMemoryStorage } from 'axios-cache-interceptor';
-const axios = setupCache(Axios, {
-    storage: buildMemoryStorage(localStorage, 'axios-cache:'),
-});
+import axios from 'axios';
 
 export const axiosClient = axios.create({
     baseURL: HOST_API,

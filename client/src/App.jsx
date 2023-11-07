@@ -1,17 +1,15 @@
 import { ReactLenis } from '@studio-freight/react-lenis';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { useRef } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
-import Nav from './components/Nav';
 import Hamburger from './components/Hamburger';
 import Header from './components/Header';
+import Nav from './components/Nav';
+import { queryClient } from './libs/reactQueryClient';
 import DetailProduct from './pages/Detail-product';
 import Home from './pages/Home';
 import Products from './pages/Products';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
-// Create a client
-const queryClient = new QueryClient();
 
 function App() {
     const lenisRef = useRef();
